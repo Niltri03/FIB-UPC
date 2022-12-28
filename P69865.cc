@@ -1,5 +1,7 @@
 
 
+
+
 #include <iostream>
 using namespace std;
 #include <vector>
@@ -9,12 +11,58 @@ using Row = vector<int>;
 using Board = vector<Row>; 
 
 
+void analizaAlfil(int x, int y, Board &b, int &monedas){
+    if(b[x][y] == -1); 
+    else {
+        if(b[x][y] > 0){
+            monedas+=b[x][y];
+            b[x][y] = 0; 
+        }
+        b[x][y] = -1; 
+        analizaAlfil(x+1, y+1, b, monedas);
+        analizaAlfil(x+1, y-1, b, monedas);
+        analizaAlfil(x-1, y+1, b, monedas);
+        analizaAlfil(x-1, y-1, b, monedas);
+        b[x][y] = -2; 
+        
+    }
+    
+    
+}
+
+void analizaCaballo(int x, int y, int maxx, int maxy, Board &b, int &monedas){
+    if (x < 0) or (y < 0) or (y > maxy ) or (x > maxx);
+    else if(b[x][y] == -1);
+    else { 
+        if(b[x][y] > 0){
+            monedas+=b[x][y];
+            b[x][y] = 0; 
+        }
+        b[x][y] = -1; 
+        analizaCaballo(x+2, y+1, b, monedas);
+        analizaCaballo(x+2, y-1, b, monedas);
+        analizaCaballo(x+1, y+2, b, monedas);
+        analizaCaballo(x+1, y-2, b, monedas);
+        analizaCaballo(x-2, y+1, b, monedas);
+        analizaCaballo(x-2, y-1, b, monedas);
+        analizaCaballo(x-1, y+2, b, monedas);
+        analizaCaballo(x-1, y-2, b, monedas);
+        b[x][y] = -2; 
+        
+    }
+    
+    
+}
+    
+    
+}
+
 int main()
 {
     int i, j; 
     cin >> i >> j; 
-    Board b(i+2, Row(j+2, -1));
     char c; 
+    Board b(i+2, Row(j+2, -1));
     queue<pair<int, int>> aAnalizar; // alfiles a aAnalizar
     queue<pair<int, int>> cAnalizar; // caballos a analizar
     for(int k = 1; k <= i; ++k){
@@ -42,5 +90,17 @@ int main()
         cout << endl;
         
     }
-    
+    int monedas = 0; 
+    while(not cAnalizar.empty()){
+        pair<int, int> act = cAnalizar.top(); 
+        analizaCaballo(act.first, act.second, i+2, j+2, b, monedas); 
+        cAnalizar.pop(); 
+        
+    }
+    while(not aAnalizar.empty()){
+        pair<int, int> act = aAnalizar.top(); 
+        analizaAlfil(act.first, act.second, b, monedas); 
+        aAnalizar.pop(); 
+        
+    }
 }
