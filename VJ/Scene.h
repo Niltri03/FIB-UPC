@@ -9,6 +9,13 @@
 #include "Player.h"
 #include "Entity.h"
 #include "Block.h"
+#include "PickUp.h"
+#include "Enemy.h"
+
+
+
+
+
 
 
 // Scene contains all the entities of our game.
@@ -23,10 +30,6 @@ public:
 	~Scene();
 
 	void init1();
-	void init2(); 
-	void initMain(); 
-	void initCredits(); 
-	void initInstr(); 
 	void update(int deltaTime);
 	void render();
 
@@ -43,12 +46,15 @@ private:
 	float currentTime;
 	glm::ivec2 posCamera;
 	glm::mat4 projection, modelview;
-	//vector<Entity*> solid, colectables, enemies, ent;
+
 	vector<Block*> blocks;
-	string curScene; 
+	vector<PickUp*> pickUps;
+	vector<Enemy*> enemies;	
+	string curScene;
+	Sprite *png;
+	Texture image;
 
 };
 
 
 #endif // _SCENE_INCLUDE
-

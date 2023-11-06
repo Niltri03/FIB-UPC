@@ -8,12 +8,16 @@ void Game::init()
 	bPlay = true;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	scene.init1();
+	mainMusic = createIrrKlangDevice();
+	efectos = createIrrKlangDevice();
+	mainMusic->play2D("/audio/getout.ogg", true);
+
 }
 
 bool Game::update(int deltaTime)
 {
 	scene.update(deltaTime);
-	
+
 	return bPlay;
 }
 
@@ -25,32 +29,30 @@ void Game::render()
 
 void Game::keyPressed(int key)
 {
-	if(key == 27) // Escape code
+	if (key == 27) // Escape code
 		bPlay = false;
-	if(key==1){
-		if(((curScene!="instr" or curScene!="creds")){scene.init1(); 
-		curScene = "lv1"; }
-	}
-	if(key==2){
-		if(curScene=="main"){
-			scene.initInstr(); 
-			curScene="instr"; 
+	if (key == '1'){
+		if((curScene != "instr") && (curScene != "creds")){
+			scene.init1();
+			curScene = "lv1";
 		}
-		else if(curScene=="lv1"){
-			scene.init2(); 
+	}
+	if (key == '2') {
+		if (curScene == "main") {
+			curScene = "instr";
+		}
+		else if (curScene == "lv1") {
 			curScene = "lv2";
 		}
 	}
-	if(key=="b"){
-		if(curScene=="instr" or curScene=="creds"){
-			scene.initMain();
-			curScene = "main"; 
+	if (key == 'b') {
+		if ((curScene == "instr") || (curScene == "creds")) {
+			curScene = "main";
 		}
 	}
-	if(key==3){
-		if((curScene!="lv1")and(curScene!="lv2")){
-			scene.initCredits();
-			curScene="creds";
+	if (key == 3) {
+		if ((curScene != "lv1") && (curScene != "lv2")) {
+			curScene = "creds";
 		}
 	}
 	keys[key] = true;
@@ -93,7 +95,15 @@ bool Game::getSpecialKey(int key) const
 	return specialKeys[key];
 }
 
+void Game::playMusic(string queCosa) {
 
+	if (queCosa == "goombaDie")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "brickHit")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "brickDestroy")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "?block")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "shroom")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "die")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "flag")efectos->play2D("../../media/getout.ogg", false);
+	
 
-
-
+}
