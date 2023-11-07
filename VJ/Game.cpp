@@ -97,13 +97,14 @@ bool Game::getSpecialKey(int key) const
 
 void Game::playMusic(string queCosa) {
 
-	if (queCosa == "goombaDie")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "brickHit")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "brickDestroy")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "?block")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "shroom")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "die")efectos->play2D("../../media/getout.ogg", false);
-	if (queCosa == "flag")efectos->play2D("../../media/getout.ogg", false);
+	if (queCosa == "goombaDie")efectos->play2D("../../audio/smb_stomp.wav", false);
+	if (queCosa == "brickHit")efectos->play2D("../../audio/smb_bump.wav", false);
+	if (queCosa == "brickDestroy")efectos->play2D("../../audio/smb_breakblock.wav", false);
+	//if (queCosa == "?block")efectos->play2D("../../audio/getout.ogg", false);
+	if (queCosa == "shroom")efectos->play2D("../../audio/smb_powerup.wav", false);
+	if (queCosa == "die")efectos->play2D("../../audio/smb_mariodie.wav", false);
+	if (queCosa == "flag")efectos->play2D("../../audio/smb_stage_clear.wav", false); //que suene al final de la animación
+	if (queCosa == "jump")efectos->play2d("../../audio/jump-small.wav", false); 
 	
 
 }
